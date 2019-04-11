@@ -44,18 +44,30 @@ class ViewController: NSViewController, NSOpenSavePanelDelegate {
                 self.alertMessage(errorMessage)
                 return
             }
-            let refrencies = self.refrenceList(path: path + "/" + project + "/" + proj)
+            let filePath = path + "/" + project + "/" + proj
+            let array = self.analyzePbxproj(at: filePath)
             
         }
     }
     
-    func refrenceList(path: String) -> [String] {
-        guard path.isFileExists(), let handle = FileHandle.init(forReadingAtPath: path) else {
+    func analyzePbxproj(at path: String) -> [String] {
+        guard let text = pbxprojText(at: path) else {return []}
+
+        let regular = try? NSRegularExpression.init(pattern: #"/\* Begin \w+ section \*/[\s\S]+?/\* End \w+ section \*/"#, options: [])
+        let nsRange = NSRange.init(location: 0, length: text.count)
+        guard let result = regular?.matches(in: text, options: [], range: nsRange) else {
             return []
+        }
+        return result.map{$0.range}.compactMap{Range.init($0, in: text)}.map{String(text[$0])}
+    }
+    
+    func pbxprojText(at path: String) -> String? {
+        guard path.isFileExists(), let handle = FileHandle.init(forReadingAtPath: path) else {
+            return nil
         }
         let data = handle.readDataToEndOfFile()
         let text = String.init(data: data, encoding: .utf8)
-        return []
+        return text
     }
     
     private func alertMessage(_ message: String) {
