@@ -120,6 +120,11 @@
 				TargetAttributes = {
 					E52ECCFF225ED1D80087D9F9 = {
 						CreatedOnToolsVersion = 10.2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -322,7 +327,6 @@
 			baseConfigurationReference = B2B0BA257B466001F78BA13A /* Pods-DependencyAnalyzer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DependencyAnalyzer/DependencyAnalyzer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3Z9X34YYXE;
@@ -342,7 +346,6 @@
 			baseConfigurationReference = 40D62C6C88E01D22D479C141 /* Pods-DependencyAnalyzer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DependencyAnalyzer/DependencyAnalyzer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3Z9X34YYXE;
